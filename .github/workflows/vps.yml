@@ -5,8 +5,8 @@
   gather_facts: yes  # Ensure system facts are gathered
 
   vars:
-    username: user
-    password: "{{ '$6$.9Xq9o0C$HkrP2VBYQWZdh48LURUM5sRuAFUwBhUXgqCkft3eiRvjBvI1L0sjRirTa0mB.hJMztvDkV6vMh2vJfR3GpImH0' }}"  # Escaped password hash
+    username: "user"
+    password: "{{ '$6$.9Xq9o0C$HkrP2VBYQWZdh48LURUM5sRuAFUwBhUXgqCkft3eiRvjBvI1L0sjRirTa0mB.hJMztvDkV6vMh2vJfR3GpImH0' }}"  # Properly escaped password
 
   pre_tasks:
     - name: Update apt cache if needed
@@ -16,17 +16,22 @@
       changed_when: false
 
   roles:
-    - role: user
-      tags: user
+    - name: user
+      tags:
+        - user
 
-    - role: hardening
-      tags: hardening
+    - name: hardening
+      tags:
+        - hardening
 
-    - role: packages
-      tags: packages
+    - name: packages
+      tags:
+        - packages
 
-    - role: docker
-      tags: docker
+    - name: docker
+      tags:
+        - docker
 
-    - role: fail2ban
-      tags: fail2ban
+    - name: fail2ban
+      tags:
+        - fail2ban
