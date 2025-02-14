@@ -1,14 +1,18 @@
 ---
-- name: Vps setup
+- name: VPS Setup
   hosts: vps
   become: yes
+  gather_facts: yes  # Ensure system facts are gathered
+
   vars:
     username: user
-    password: $6$.9Xq9o0C$HkrP2VBYQWZdh48LURUM5sRuAFUwBhUXgqCkft3eiRvjBvI1L0sjRirTa0mB.hJMztvDkV6vMh2vJfR3GpImH0
+    password: "{{ '$6$.9Xq9o0C$HkrP2VBYQWZdh48LURUM5sRuAFUwBhUXgqCkft3eiRvjBvI1L0sjRirTa0mB.hJMztvDkV6vMh2vJfR3GpImH0' }}"  # Escaped password hash
 
   pre_tasks:
     - name: Update apt cache if needed
-      apt: update_cache=yes cache_valid_time=86400
+      apt:
+        update_cache: yes
+        cache_valid_time: 86400
       changed_when: false
 
   roles:
